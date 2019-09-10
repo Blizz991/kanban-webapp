@@ -29,15 +29,16 @@
     <!-- #region Content -->
     <div class="wrapper">
         <div class="tasks__row">
-
-            <section class="tasks__column card green darken-2">
+            <section class="tasks__column card grey lighten-1">
                 <div class="tasks__column-top-container">
                     <span class="fw-600 card-title">Backlog</span>
-                    <a href="#taskModal" class="btn waves-effect waves-light green ml-a modal-trigger">
+                    <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    <a href="#taskModal" class="btn waves-effect waves-light green modal-trigger">
                         Add task <i class="material-icons right">add</i>
                     </a>
                 </div>
-                <!-- <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5> -->
                 <article class="card small red darken-2">
                     <div class="card-content ##tasksContentClasses##">
                         <span class="card-title">##taskTitle##</span>
@@ -60,7 +61,6 @@
                     <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
                 </article>
             </section>
-
             <section class="tasks__column blue darken-2">
                 <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
                 <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
@@ -111,7 +111,6 @@
                     <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
                 </article>
             </section>
-
             <a class="btn-floating btn-large waves-effect waves-light green add-column-btn">
                 <i class="material-icons">add</i>
             </a>
@@ -255,6 +254,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/objects.js"></script>
     <script src="js/main.js"></script>
 </body>
 

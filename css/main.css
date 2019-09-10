@@ -51,6 +51,10 @@ body {
     margin-left: auto;
 }
 
+.mr-5{
+    margin-right: 5px;
+}
+
 .fw-600{
     font-weight: 600 !important;
 }
@@ -70,6 +74,10 @@ body {
 .card.small {
     max-height: 100px;
     min-height: 50px;
+}
+
+.btn{
+    border-radius: 5px;
 }
 
  /* label color */

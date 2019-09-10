@@ -10,11 +10,24 @@ $(document).ready(function () {
     $('.datepicker').datepicker();
     $('.timepicker').timepicker();
 
-    $.ajax({
-        url: 'https://api.kanban.weibel.dev/api/Task',
-        data: data,
-        success: success,
-        dataType: dataType
+    getTasks(function (tasksList) {
+        if (tasksList !== null) {
+            console.log(tasksList);
+            tasksList.forEach(task => {
+                let taskFromTemplate = $('#taskTemplate').html()
+                    .replace('##taskID##', task.Id)
+                    .replace('##taskTitle##', task.Title)
+                    .replace('##taskContent##', task.Description)
+                    .replace('##taskEstimate##', task.Estimate)
+                    .replace('##taskDeadline##', task.Deadline)
+                    .replace('##taskPriority##', task.Priority)
+                    .replace('##taskTimestamp##', task.Timestamp);
+                $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
+            });
+        } else {
+            alert('API call failed');
+        }
+
     });
 
     $('.tasks__row').sortable({

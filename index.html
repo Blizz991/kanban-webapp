@@ -29,17 +29,17 @@
     <!-- #region Content -->
     <div class="wrapper">
         <div class="tasks__row">
-            <section class="tasks__column card grey lighten-1">
+            <section id="tasksBacklogColumn" class="tasks__column card grey lighten-1">
                 <div class="tasks__column-top-container">
                     <span class="fw-600 card-title">Backlog</span>
                     <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
-                            <i class="material-icons">edit</i>
-                        </a>
+                        <i class="material-icons">edit</i>
+                    </a>
                     <a href="#taskModal" class="btn waves-effect waves-light green modal-trigger">
                         Add task <i class="material-icons right">add</i>
                     </a>
                 </div>
-                <article class="card small red darken-2">
+                <!-- <article class="card small red darken-2">
                     <div class="card-content ##tasksContentClasses##">
                         <span class="card-title">##taskTitle##</span>
                         <p>##taskContent##</p>
@@ -59,9 +59,9 @@
                         <p>##taskContent##</p>
                     </div>
                     <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
+                </article> -->
             </section>
-            <section class="tasks__column blue darken-2">
+            <!-- <section class="tasks__column blue darken-2">
                 <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
                 <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
                 <article class="card small orange darken-2">
@@ -110,7 +110,7 @@
                     </div>
                     <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
                 </article>
-            </section>
+            </section> -->
             <a class="btn-floating btn-large waves-effect waves-light green add-column-btn">
                 <i class="material-icons">add</i>
             </a>
@@ -152,14 +152,20 @@
         </section>
     </template>
     <template id="taskTemplate">
-        <article id="task-##taskID##" class="card small ##taskClasses##">
-            <div class="card-content ##taskContentClasses##">
+        <article data-task-id="##taskID##" data-task-userId="##taskUserId##" class="card small">
+            <div class="card-content">
                 <span class="card-title">##taskTitle##</span>
                 <p>##taskContent##</p>
+                <img class="rounded-img" src="https://placehold.it/50" alt="">
+                <p>##taskEstimate##</p>
+                <p>##taskDeadline##</p>
+                <p>##taskPriority##</p>
+                <p>##taskTimestamp##</p>
             </div>
             <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
         </article>
     </template>
+    <!-- #endregion Templates -->
     <div id="taskModal" class="modal modal-fixed-footer">
         <section class="modal-content">
             <h4 class="taskModalTitle">Creating a new task</h4>
@@ -245,17 +251,18 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
         </div>
     </div>
-    <!-- #endregion Templates -->
+
 
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/objects.js"></script>
+    <script src="js/apiClient.js"></script>
     <script src="js/main.js"></script>
 </body>
 

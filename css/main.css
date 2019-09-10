@@ -38,11 +38,14 @@ body {
 }
 
 .add-column-btn {
-    display: flex;
-    margin: auto 0 auto 15px;
+    /* display: flex;
+    margin: auto 0 auto 15px; */
+    position: fixed;
+    right: 15%;
+    top: 50%;
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
@@ -51,13 +54,18 @@ body {
     margin-left: auto;
 }
 
-.mr-5{
+.mr-5 {
     margin-right: 5px;
 }
 
-.fw-600{
+.fw-600 {
     font-weight: 600 !important;
 }
+
+.rounded-img {
+    border-radius: 50%;
+}
+
 /* #endregion Helpers */
 
 /* MaterializeCSS overrides */
@@ -72,38 +80,43 @@ body {
 }
 
 .card.small {
-    max-height: 100px;
+    /* max-height: 100px; */
     min-height: 50px;
 }
 
-.btn{
+.btn {
     border-radius: 5px;
 }
 
- /* label color */
- .input-field label {
+/* label color */
+.input-field label {
     color: #000;
-  }
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
+}
+
+/* label focus color */
+.input-field input[type=text]:focus+label {
     color: #000;
-  }
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
-  }
-  /* valid color */
-  .input-field input[type=text].valid {
+}
+
+/* valid color */
+.input-field input[type=text].valid {
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
-  }
-  /* invalid color */
-  .input-field input[type=text].invalid {
+}
+
+/* invalid color */
+.input-field input[type=text].invalid {
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
-  }
-  /* icon prefix focus color */
-  .input-field .prefix.active {
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
     color: #000;
-  }
+}

@@ -6,20 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kanban'd</title>
-    <style>
-        .feather {
-            width: 32px;
-            height: 32px;
-            vertical-align: text-bottom;
-            color: #000;
-        }
-    </style>
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <span data-feather="columns"></span>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js"></script>
-    <script>feather.replace();</script>
+    <!-- #region Sidenav -->
+    <ul id="slide-out" class="sidenav">
+        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+        <li><a href="#!">Second Link</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+    <!-- #endregion Sidenav -->
+
+    <!-- #region Content -->
+    <div class="container">
+        <div class="tasks__row"></div>
+    </div>
+    <!-- #endregion Content -->
+    <!-- #region Toolbar -->
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red sidenav-trigger" data-target="slide-out">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li>
+                <a class="btn-floating red tooltipped" data-position="left" data-tooltip="Open menu" href="#">
+                    <i class="material-icons">menu</i>
+                </a>
+            </li>
+            <li><a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
+                        class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating green tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
+                        class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
+                        class="material-icons">attach_file</i></a></li>
+        </ul>
+    </div>
+    <!-- #endregion Toolbar -->
+    <!-- #region Templates -->
+    <template id="tasksColumnTemplate">
+        <div class="tasks__column ##tasksColumnClasses##">
+            <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
+            <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
+        </div>
+    </template>
+    <template id="taskTemplate">
+        <div class="card small ##taskClasses##">
+            <div class="card-content ##tasksContentClasses##">
+                <span class="card-title">##taskTitle##</span>
+                <p>##taskContent##</p>
+            </div>
+            <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+        </div>
+    </template>
+    <template id="modalTemplate">
+        <div id="mainModal" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+            </div>
+        </div>
+    </template>
+    <!-- #endregion Templates -->
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

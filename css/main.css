@@ -1,0 +1,44 @@
+body {
+    background: #3d3d3d;
+}
+
+/* .collection{
+    height: 95vh;
+    width: 100%;
+} */
+
+.tasks__row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: left;
+}
+
+.tasks__column {
+    position: relative;
+    min-height: 95vh;
+    min-width: 25%;
+    padding: 0 1rem 2rem;
+    align-items: stretch;
+    align-content: stretch;
+    margin: auto 10px;
+}
+
+.card {
+    margin: 5px 0;
+    position: relative;
+}
+
+.card.small {
+    max-height: 100px;
+    min-height: 50px;
+}
+
+.drag-handle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: move;
+    cursor: -webkit-grabbing;
+    color: #fff;
+}

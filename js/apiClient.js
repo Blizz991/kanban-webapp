@@ -43,13 +43,13 @@ function postTask(modalId) {
     let modalInstance = M.Modal.getInstance(modalEl);
 
     let taskObj = {
-        title: "This is a new task",
-        userId: 4,
-        kanbanColumnId: 1,
-        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt iure quaerat libero consequuntur mollitia quis excepturi fugiat fuga asperiores in officia dolores facere quidem, vero maxime placeat error nulla nam?",
-        estimate: 3,
-        deadline: "2019-10-17T05:30:12.278Z",
-        priority: 2,
+        title: $('#taskTitleInput').val(),
+        userId: $('#taskUserSelect').val(),
+        kanbanColumnId: 1, //Backlog
+        description: $('#taskDescriptionTextArea').val(),
+        estimate: $('#taskEstimateInput').val(),
+        deadline: (moment($('#taskDeadlineDateInput').val() + " " + $('#taskDeadlineTimeInput').val()).toISOString()),
+        priority: $('#taskPrioritySelect').val(),
     };
 
     let jsonTask = JSON.stringify(taskObj);

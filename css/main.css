@@ -3,6 +3,11 @@ body {
     padding: 2rem;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 .tasks__row {
     display: flex;
     flex-wrap: nowrap;
@@ -12,12 +17,13 @@ body {
 
 .tasks__column {
     position: relative;
-    min-height: 95vh;
+    min-height: 90vh;
     min-width: 20%;
+    max-width: 20%;
     padding: 0 1rem 2rem;
     align-items: stretch;
     align-content: stretch;
-    margin: auto 10px;
+    margin: 5px 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.16);
     /* border: 1px solid #000; */
@@ -28,6 +34,11 @@ body {
     padding: 0.5rem 0 1rem;
 }
 
+.tasks__column-top-container h5 {
+    margin: 0;
+    line-height: 36px;
+}
+
 .drag-handle {
     position: absolute;
     top: 5px;
@@ -35,6 +46,9 @@ body {
     cursor: move;
     cursor: -webkit-grabbing;
     color: #fff;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
 }
 
 .add-column-btn {
@@ -45,13 +59,31 @@ body {
     top: 50%;
 }
 
-.d-none {
-    display: none;
+.card-user-img {
+    margin: 0 0 0 auto;
+}
+
+.card-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: auto;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.card-bottom .badge {
+    display: inline-flex;
+    color: #fff;
 }
 
 /* #region Helpers */
 .ml-a {
     margin-left: auto;
+}
+
+.ml-3 {
+    margin-left: 3px;
 }
 
 .mr-5 {
@@ -62,8 +94,12 @@ body {
     font-weight: 600 !important;
 }
 
-.rounded-img {
+.rounded {
     border-radius: 50%;
+}
+
+.d-none {
+    display: none;
 }
 
 /* #endregion Helpers */
@@ -74,7 +110,7 @@ body {
     bottom: 10%;
 }
 
-.card {
+.tasks__column .card {
     margin: 5px 0;
     position: relative;
 }
@@ -82,10 +118,34 @@ body {
 .card.small {
     /* max-height: 100px; */
     min-height: 50px;
+    height: unset;
+}
+
+.card-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-title,
+.card p {
+    width: 100%;
 }
 
 .btn {
     border-radius: 5px;
+}
+
+span.badge {
+    height: unset;
+    min-width: unset;
+    padding: 0.4rem;
+    border-radius: 5px;
+    margin-left: 0;
+}
+
+span.badge>.material-icons {
+    font-size: 20px;
+    margin-top: 1px;
 }
 
 /* label color */

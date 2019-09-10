@@ -1,4 +1,4 @@
-function sendNotification(content, _displayLength, _classes) {
+function sendNotification(content, _classes, _displayLength = 4000) {
     M.toast({
         html: content,
         displayLength: _displayLength,
@@ -14,9 +14,4 @@ function confirmCloseModal(modalId) {
     if (confirmed == true) {
         modalInstance.close();
     }
-}
-
-
-function createNewTask() {
-
 }

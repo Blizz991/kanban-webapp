@@ -34,6 +34,16 @@ function KanbanColumn(Id, Name, Color, Order, Timestamp) {
     this.Timestamp = Timestamp;
 }
 
+KanbanColumn.fromJson = function (json) {
+    return new KanbanColumn(
+        json.id,
+        json.name,
+        json.color,
+        json.order,
+        json.timestamp
+    );
+}
+
 function User(Id, Username, ImagePath, Timestamp) {
     this.Id = Id;
     this.Username = Username;

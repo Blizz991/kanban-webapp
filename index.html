@@ -28,92 +28,21 @@
 
     <!-- #region Content -->
     <div class="wrapper">
-        <div class="tasks__row">
-            <section id="tasksBacklogColumn" class="tasks__column card grey lighten-1">
+        <div id="mainColumnContainer" class="tasks__row">
+            <section id="tasksBacklogColumn" class="tasks__column card backlog grey lighten-1">
                 <div class="tasks__column-top-container">
-                    <span class="fw-600 card-title">Backlog</span>
-                    <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
+                    <h5 class="fw-600 card-title">Backlog</h5>
+                    <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
                         <i class="material-icons">edit</i>
-                    </a>
+                    </a> -->
                     <a href="#taskModal" class="btn waves-effect waves-light green modal-trigger">
                         Add task <i class="material-icons right">add</i>
                     </a>
                 </div>
-                <!-- <article class="card small red darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small red darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small red darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article> -->
             </section>
-            <!-- <section class="tasks__column blue darken-2">
-                <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
-                <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-            </section>
-            <section class="tasks__column blue darken-2">
-                <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
-                <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-                <article class="card small orange darken-2">
-                    <div class="card-content ##tasksContentClasses##">
-                        <span class="card-title">##taskTitle##</span>
-                        <p>##taskContent##</p>
-                    </div>
-                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-                </article>
-            </section> -->
-            <a class="btn-floating btn-large waves-effect waves-light green add-column-btn">
+            <!-- <a class="btn-floating btn-large waves-effect waves-light green add-column-btn">
                 <i class="material-icons">add</i>
-            </a>
+            </a> -->
         </div>
     </div>
     <!-- #endregion Content -->
@@ -146,21 +75,31 @@
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <section id="tasksColumn-##tasksColumnID##" class="tasks__column ##tasksColumnClasses##">
-            <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
+        <section id="tasksColumn-##tasksColumnID##" class="tasks__column card ##tasksColumnClasses##">
+            <div class="tasks__column-top-container">
+                <h5 class="fw-600 card-title ##tasksColumnTitleClasses##">##tasksColumnTitle##</h5>
+                <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
+                            <i class="material-icons">edit</i>
+                        </a> -->
+            </div>
             <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
         </section>
     </template>
     <template id="taskTemplate">
         <article data-task-id="##taskID##" data-task-userId="##taskUserId##" class="card small">
             <div class="card-content">
-                <span class="card-title">##taskTitle##</span>
+                <h6 class="card-title">##taskTitle##</h6>
                 <p>##taskContent##</p>
-                <img class="rounded-img" src="https://placehold.it/50" alt="">
-                <p>##taskEstimate##</p>
-                <p>##taskDeadline##</p>
-                <p>##taskPriority##</p>
-                <p>##taskTimestamp##</p>
+                <div class="card-bottom">
+                    <span class="badge blue"><i class="material-icons">timer</i> <span class="ml-3"><span
+                                contenteditable="true">##taskEstimate##</span></span></span>
+                    <span class="badge red tooltipped" data-tooltip="Not working" data-position="top"><i
+                            class="material-icons">today</i> ##taskDeadline##</span>
+                    <span class="badge yellow"><i class="material-icons">priority_high</i> <span
+                            class="ml-3">##taskPriority##</span></span>
+                    <!-- <span>Created: ##taskTimestamp##</span> -->
+                    <!-- <img class="rounded card-user-img" src="https://placehold.it/32" alt=""> -->
+                </div>
             </div>
             <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
         </article>
@@ -237,7 +176,7 @@
         </section>
         <div class="modal-footer">
             <a href="#!" onclick="confirmCloseModal('#taskModal');" class="waves-effect red waves-red btn">Cancel</a>
-            <a href="#!" onclick="createNewTask();" class="waves-effect green waves-green btn">Submit</a>
+            <a href="#!" onclick="postTask('#taskModal');" class="waves-effect green waves-green btn">Submit</a>
         </div>
     </div>
 
@@ -260,6 +199,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/objects.js"></script>
     <script src="js/apiClient.js"></script>

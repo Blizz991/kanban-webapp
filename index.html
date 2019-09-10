@@ -27,8 +27,95 @@
     <!-- #endregion Sidenav -->
 
     <!-- #region Content -->
-    <div class="container">
-        <div class="tasks__row"></div>
+    <div class="wrapper">
+        <div class="tasks__row">
+
+            <section class="tasks__column card green darken-2">
+                <div class="tasks__column-top-container">
+                    <span class="fw-600 card-title">Backlog</span>
+                    <a href="#taskModal" class="btn waves-effect waves-light green ml-a modal-trigger">
+                        Add task <i class="material-icons right">add</i>
+                    </a>
+                </div>
+                <!-- <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5> -->
+                <article class="card small red darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small red darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small red darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+            </section>
+
+            <section class="tasks__column blue darken-2">
+                <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
+                <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+            </section>
+            <section class="tasks__column blue darken-2">
+                <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
+                <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+                <article class="card small orange darken-2">
+                    <div class="card-content ##tasksContentClasses##">
+                        <span class="card-title">##taskTitle##</span>
+                        <p>##taskContent##</p>
+                    </div>
+                    <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
+                </article>
+            </section>
+
+            <a class="btn-floating btn-large waves-effect waves-light green add-column-btn">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
     </div>
     <!-- #endregion Content -->
     <!-- #region Toolbar -->
@@ -42,42 +129,123 @@
                     <i class="material-icons">menu</i>
                 </a>
             </li>
-            <li><a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
-                        class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
-                        class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="I am a tooltip"><i
-                        class="material-icons">attach_file</i></a></li>
+            <li>
+                <a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="I am a tooltip">
+                    <i class="material-icons">format_quote</i>
+                </a>
+            </li>
+            <li><a class="btn-floating green tooltipped" data-position="left" data-tooltip="I am a tooltip">
+                    <i class="material-icons">publish</i>
+                </a>
+            </li>
+            <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="I am a tooltip">
+                    <i class="material-icons">attach_file</i>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <div class="tasks__column ##tasksColumnClasses##">
+        <section id="tasksColumn-##tasksColumnID##" class="tasks__column ##tasksColumnClasses##">
             <h5 class="##tasksColumnTitleClasses">##tasksColumnTitle##</h5>
             <i class="drag-handle row-drag-handle material-icons">drag_handle</i>
-        </div>
+        </section>
     </template>
     <template id="taskTemplate">
-        <div class="card small ##taskClasses##">
-            <div class="card-content ##tasksContentClasses##">
+        <article id="task-##taskID##" class="card small ##taskClasses##">
+            <div class="card-content ##taskContentClasses##">
                 <span class="card-title">##taskTitle##</span>
                 <p>##taskContent##</p>
             </div>
             <i class="drag-handle column-drag-handle material-icons">drag_handle</i>
-        </div>
+        </article>
     </template>
-    <template id="modalTemplate">
-        <div id="mainModal" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+    <div id="taskModal" class="modal modal-fixed-footer">
+        <section class="modal-content">
+            <h4 class="taskModalTitle">Creating a new task</h4>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input placeholder="Task title" id="taskTitleInput" type="text" class="validate">
+                    <label for="taskTitleInput">Title</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="taskPrioritySelect" class="validate">
+                        <optgroup class="red-text" label="High priority">
+                            <option value="1">Urgent</option>
+                            <option value="2">Soon</option>
+                        </optgroup>
+                        <optgroup label="Medium priority">
+                            <option value="3">When possible</option>
+                            <option value="4">If possible</option>
+                        </optgroup>
+                        <optgroup label="Low priority">
+                            <option value="5">If time allows</option>
+                            <option value="6">At some point</option>
+                        </optgroup>
+                    </select>
+                    <label>Priority</label>
+                    <span class="helper-text" data-error="Please select a priority">Select priority</span>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="taskDescriptionTextArea" placeholder="Description text"
+                        class="materialize-textarea"></textarea>
+                    <label for="taskDescriptionTextArea">Description</label>
+                </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <select id="taskUserSelect" class="icons">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="" data-icon="images/sample-1.jpg" class="left">example 1</option>
+                        <option value="" data-icon="images/office.jpg" class="left">example 2</option>
+                        <option value="" data-icon="images/yuna.jpg" class="left">example 3</option>
+                    </select>
+                    <label>Assign user</label>
+                    <span class="helper-text">Optional - You do not need to assign a user immediately</span>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input placeholder="12" id="taskEstimateInput" type="number" class="validate">
+                    <label for="taskEstimateInput">Estimate</label>
+                    <span class="helper-text" data-error="Must be a whole number">Optional - in whole hours</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input id="taskDeadlineDateInput" type="text" class="datepicker">
+                    <label for="taskDeadlineDateInput">Deadline (date)</label>
+                    <span class="helper-text">Optional</span>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="taskDeadlineTimeInput" type="text" class="timepicker">
+                    <label for="taskDeadlineTimeInput">Deadline (time)</label>
+                    <span class="helper-text">Optional</span>
+                </div>
+            </div>
+            <!-- Hidden inputs -->
+            <div class="d-none">
+                <input id="taskKanbanColumnIdInput" type="number">
+                <input id="taskOrderInput" type="number">
+            </div>
+        </section>
+        <div class="modal-footer">
+            <a href="#!" onclick="confirmCloseModal('#taskModal');" class="waves-effect red waves-red btn">Cancel</a>
+            <a href="#!" onclick="createNewTask();" class="waves-effect green waves-green btn">Submit</a>
         </div>
-    </template>
+    </div>
+
+    </div>
+    <div id="columnModal" class="modal">
+        <div class="modal-content">
+            <h4>##modal</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+        </div>
+    </div>
     <!-- #endregion Templates -->
 
 

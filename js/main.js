@@ -21,7 +21,10 @@ $(document).ready(function () {
                     .replace('##tasksColumnClasses##', column.Color);
                 // .replace('##taskEstimate##', column.Order)
                 // .replace('##taskTimestamp##', column.Timestamp);
-                $(columnFromTemplate).appendTo($('#mainColumnContainer'));
+                if (column.Id !== 1) {
+                    $(columnFromTemplate).appendTo($('#mainColumnContainer'));
+                }
+
                 // console.log(columnFromTemplate);
             });
             //TODO: Order before appending
@@ -31,7 +34,7 @@ $(document).ready(function () {
                 ghostClass: 'grey',
                 handle: ".row-drag-handle"
             });
-        
+
             $('.tasks__column').sortable({
                 swapThreshold: 1,
                 // invertSwap: true,
@@ -44,28 +47,36 @@ $(document).ready(function () {
         else {
             alert('Column API call failed');
         }
-    });
 
-    getTasks(function (tasksList) {
-        if (tasksList !== null) {
-            // console.log(tasksList);
-            tasksList.forEach(task => {
-                let taskFromTemplate = $('#taskTemplate').html()
-                    .replace('##taskID##', task.Id)
-                    .replace('##taskTitle##', task.Title)
-                    .replace('##taskContent##', task.Description)
-                    .replace('##taskEstimate##', task.Estimate)
-                    // .replace('##taskDeadline##',  moment(task.Deadline).format("Do of MMM. YY, hh:mm A"))
-                    .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
-                    .replace('##taskPriority##', task.Priority)
-                // .replace('##taskTimestamp##', task.Timestamp);
-                let columnId = '#tasksColumn-' + column.KanbanColumnId;
-                $(columnFromTemplate).appendTo($(columnId));
-                $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
-            });
-        } else {
-            alert('Task API call failed');
-        }
+        getTasks(function (tasksList) {
+            if (tasksList !== null) {
+                // console.log(tasksList);
+                tasksList.forEach(task => {
+                    let taskFromTemplate = $('#taskTemplate').html()
+                        .replace('##taskID##', task.Id)
+                        .replace('##taskTitle##', task.Title)
+                        .replace('##taskContent##', task.Description)
+                        .replace('##taskEstimate##', task.Estimate)
+                        // .replace('##taskDeadline##',  moment(task.Deadline).format("Do of MMM. YY, hh:mm A"))
+                        .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
+                        .replace('##taskPriority##', task.Priority)
+                    // .replace('##taskTimestamp##', task.Timestamp);
+                    let columnId = '#tasksColumn-' + task.KanbanColumnId;
+                    if (columnId === "#tasksColumn-1") {
+                        $(taskFromTemplate).appendTo($('#tasksColumn-0'));
+                    } else {
+                        $(taskFromTemplate).appendTo($(columnId));
+                        console.log('test');
+                    }
+                    console.log(columnId);
+                    // $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
+                    // $(taskFromTemplate).appendTo($('#tasksColumn-0'));
+                });
+            } else {
+                alert('Task API call failed');
+            }
+        });
+
     });
 
     $('.tooltipped').tooltip();

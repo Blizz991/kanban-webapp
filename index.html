@@ -91,11 +91,11 @@
                 <h6 class="card-title">##taskTitle##</h6>
                 <p>##taskContent##</p>
                 <div class="card-bottom">
-                    <span class="badge blue"><i class="material-icons">timer</i> <span class="ml-3"><span
+                    <span class="badge blue" data-tooltip="Estimate" data-position="top"><i class="material-icons">timer</i> <span class="ml-3"><span
                                 contenteditable="true">##taskEstimate##</span></span></span>
-                    <span class="badge red tooltipped" data-tooltip="Not working" data-position="top"><i
-                            class="material-icons">today</i> ##taskDeadline##</span>
-                    <span class="badge yellow"><i class="material-icons">priority_high</i> <span
+                    <span class="badge red tooltipped" data-tooltip="##taskDeadline##" data-position="top"><i
+                            class="material-icons">today</i></span>
+                    <span class="badge ##taskPriorityClasses##" data-tooltip="Priority" data-position="top"><i class="material-icons">priority_high</i> <span
                             class="ml-3">##taskPriority##</span></span>
                     <!-- <span>Created: ##taskTimestamp##</span> -->
                     <!-- <img class="rounded card-user-img" src="https://placehold.it/32" alt=""> -->

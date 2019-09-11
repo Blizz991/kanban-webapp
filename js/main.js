@@ -57,9 +57,10 @@ $(document).ready(function () {
                         .replace('##taskTitle##', task.Title)
                         .replace('##taskContent##', task.Description)
                         .replace('##taskEstimate##', task.Estimate)
-                        // .replace('##taskDeadline##',  moment(task.Deadline).format("Do of MMM. YY, hh:mm A"))
-                        .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
+                        .replace('##taskDeadline##',  moment(task.Deadline).format("Do of MMM. YY, hh:mm A"))
+                        // .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
                         .replace('##taskPriority##', task.Priority)
+                        .replace('##taskPriorityClasses##', getPriorityClasses(task.Priority))
                     // .replace('##taskTimestamp##', task.Timestamp);
                     let columnId = '#tasksColumn-' + task.KanbanColumnId;
                     if (columnId === "#tasksColumn-1") {
@@ -75,10 +76,11 @@ $(document).ready(function () {
             } else {
                 alert('Task API call failed');
             }
+            $('.tooltipped').tooltip();
         });
-
+        
     });
 
-    $('.tooltipped').tooltip();
+    
     // sendNotification('Hello world!', 1000, 'green');
 });

@@ -59,6 +59,8 @@ $(document).ready(function () {
                     .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
                     .replace('##taskPriority##', task.Priority)
                 // .replace('##taskTimestamp##', task.Timestamp);
+                let columnId = '#tasksColumn-' + column.KanbanColumnId;
+                $(columnFromTemplate).appendTo($(columnId));
                 $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
             });
         } else {

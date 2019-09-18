@@ -31,19 +31,14 @@
             <section id="tasksColumn-0" class="tasks__column card backlog purple lighten-2">
                 <div class="tasks__column-top-container">
                     <h5 class="fw-600 card-title">Backlog</h5>
-                    <a href="#backlogModal" onclick="alert('Editing is not implemented yet');"
-                        class="btn btn-small mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a onclick="addTask();" class="btn btn-small waves-effect waves-light green">
-                        <i class="material-icons right">add</i>
-                    </a>
+                    <div class="column-top-btns">
+                        <i onclick="editColumn('tasksColumn-0');"
+                            class="material-icons icon mr-5 rounded waves-effect waves-dark">edit</i>
+                        <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
+                    </div>
                 </div>
             </section>
-            <a onclick="alert('It\'s not possible to add columns yet.');"
-                class="btn-floating btn-large waves-effect waves-light green add-column-btn">
-                <i class="material-icons">add</i>
-            </a>
+            <i class="add-column-btn material-icons icon icon-bg">add</i>
         </div>
     </div>
     <!-- #endregion Content -->
@@ -76,7 +71,7 @@
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <section id="tasksColumn-##tasksColumnID##" class="tasks__column card ##tasksColumnClasses##">
+        <section id="tasksColumn-##tasksColumnID##" data-column-id="##tasksColumnId##" class="tasks__column card ##tasksColumnClasses##">
             <div class="tasks__column-top-container">
                 <h5 class="fw-600 card-title ##tasksColumnTitleClasses##">##tasksColumnTitle##</h5>
                 <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
@@ -87,30 +82,40 @@
         </section>
     </template>
     <template id="taskTemplate">
-        <section id="task-##taskID##" contenteditable="false" data-collapsed-state="false" data-task-userId="##taskUserId##" class="card small">
-            <i onclick="triggerTaskCollapseState(this);" class="material-icons collapse-trigger collapse-shown icon icon-bg">expand_less</i>
-            <h6 class="card-title">##taskTitle##</h6>
-            <article class="card-content">
-                <p>##taskContent##</p>
-                <div class="card-bottom">
-                    <span class="badge blue darken-2 tooltipped" data-tooltip="Estimate in hours" data-position="top">
-                        <i contenteditable="false" class="material-icons mr-3">timer</i>
-                        ##taskEstimate##
-                    </span>
-                    <span class="badge red tooltipped ##taskDeadlineClasses##" data-tooltip="##taskDeadlineFormatted##" data-position="top">
-                        <i class="material-icons">today</i> ##taskDeadline##
-                    </span>
-                    <span class="badge tooltipped ##taskPriorityClasses##" data-tooltip="##taskPriorityUrgency##" data-position="top">
-                        <i contenteditable="false" class="material-icons">##taskPriorityIcon##</i>
-                    </span>
-                    <!-- <span>Created: ##taskTimestamp##</span> -->
-                    <!-- <img class="rounded card-user-img" src="https://placehold.it/32" alt=""> -->
-                </div>
+        <section id="##taskID##" data-task-id="##taskId##" contenteditable="false" data-collapsed-state="##taskCollapseState##"
+            class="card small">
+            <!-- <section id="##taskID##" contenteditable="false" data-collapsed-state="##taskCollapseState##"
+            data-task-userId="##taskUserId##" class="card small"> -->
+            <i onclick="triggerTaskCollapseState(this);"
+                class="material-icons collapse-trigger icon icon-bg">##taskCollapseIndicator##</i>
+            <h6 data-name="task-title" class="card-title">##taskTitle##</h6>
+            <article data-name="task-content" class="card-content">
+                ##taskContent##
+            </article>
+            <article class="card-bottom">
+                <span class="badge blue darken-2 tooltipped" data-tooltip="Estimate in hours" data-position="top">
+                    <i contenteditable="false" class="material-icons mr-3">timer</i>
+                    <span data-name="task-estimate">##taskEstimate##</span>
+                </span>
+                <!-- <span class="badge red tooltipped ##taskDeadlineClasses##" data-tooltip="##taskDeadlineFormatted##"
+                    data-position="top">
+                    <i class="material-icons">today</i> ##taskDeadline##
+                </span> -->
+                <span class="badge tooltipped ##taskPriorityClasses##" data-tooltip="##taskPriorityUrgency##"
+                    data-position="top">
+                    <i contenteditable="false" class="material-icons">##taskPriorityIcon##</i>
+                    <span data-name="task-priority" contenteditable="true">##taskPriority##</span>
+                </span>
                 <div contenteditable="false" class="card-btns">
                     <i onclick="deleteTask(this);" class="material-icons icon mr-a">delete_forever</i>
-                    <i onclick="setEditTaskState(this);" data-editing-state="false" class="material-icons icon tooltipped" data-tooltip="Toggle editing" data-position="bottom">edit</i>
+                    <i onclick="setEditTaskState(this);" data-name="task-timestamp" data-last-updated="##taskTimestamp##" data-editing-state="false"
+                        class="material-icons icon tooltipped" data-tooltip="Toggle editing"
+                        data-position="bottom">edit</i>
                     <img class="icon drag-handle column-drag-handle" src="images/move-icon.svg" alt="||">
                 </div>
+
+                <!-- <span>Created: ##taskTimestamp##</span> -->
+                <!-- <img class="rounded card-user-img" src="https://placehold.it/32" alt=""> -->
             </article>
 
         </section>
@@ -210,8 +215,6 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
         </div>
     </div>
-
-
 
     <!-- Compiled and minified JavaScript -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->

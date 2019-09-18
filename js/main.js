@@ -1,3 +1,6 @@
+var allColumns;
+var allTasks;
+
 $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.fixed-action-btn').floatingActionButton();
@@ -11,12 +14,14 @@ $(document).ready(function () {
 
     getColumns(function (columnList) {
         if (columnList !== null) {
+            allColumns = columnList; //Save columns to manipulate later
             // console.log(columnList);
             // columnList = columnList.sort(function (a, b) { return a.Order - b.Order });
             // console.log(columnList);
             columnList.forEach(column => {
                 let columnFromTemplate = $('#tasksColumnTemplate').html()
                     .replace('##tasksColumnID##', column.Id)
+                    .replace('##tasksColumnId##', column.Id)
                     .replace('##tasksColumnTitle##', column.Name)
                     .replace('##tasksColumnClasses##', column.Color);
                 // .replace('##taskEstimate##', column.Order)
@@ -24,7 +29,6 @@ $(document).ready(function () {
                 if (column.Id !== 1) {
                     $(columnFromTemplate).appendTo($('#mainColumnContainer'));
                 }
-
                 // console.log(columnFromTemplate);
             });
             //TODO: Order before appending
@@ -32,30 +36,50 @@ $(document).ready(function () {
                 group: 'row',
                 animation: 250,
                 ghostClass: 'grey',
-                handle: ".row-drag-handle"
+                handle: ".row-drag-handle",
             });
 
             $('.tasks__column').sortable({
                 swapThreshold: 1,
                 // invertSwap: true,
+                sort: false,
                 group: 'column',
                 animation: 250,
                 ghostClass: 'grey',
-                handle: ".column-drag-handle"
+                handle: ".column-drag-handle",
+                onEnd: function (/**Event*/evt) {
+                    var itemEl = evt.item;  // dragged HTMLElement
+
+                    
+                    if (evt.to !== evt.from) {
+                        updateTask($(itemEl));    
+                    }else{
+                        console.log("Same column");
+                    }
+                    
+                    // evt.to;    // target list
+                    // evt.from;  // previous list
+                    // evt.oldIndex;  // element's old index within old parent
+                    // evt.newIndex;  // element's new index within new parent
+                    // evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+                    // evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+                    // evt.clone // the clone element
+                    // evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+                },
             });
         }
         else {
             alert('Column API call failed');
         }
-
         getTasks(function (tasksList) {
             if (tasksList !== null) {
-                // console.log(tasksList);
+                allTasks = tasksList;
                 tasksList.forEach(task => {
                     let taskUrgency = "";
                     let taskPriorityClasses = "";
                     let taskPriorityIcon = "";
                     switch (task.Priority) {
+                        case 0:
                         case 1:
                             taskUrgency = "Urgent";
                             taskPriorityClasses = "red darken-3";
@@ -81,14 +105,12 @@ $(document).ready(function () {
                             taskPriorityClasses = "green darken-3";
                             taskPriorityIcon = "timelapse";
                             break;
-                        case 6:
+                        default:
                             taskUrgency = "At some point";
                             taskPriorityClasses = "green darken-1";
                             taskPriorityIcon = "timer_off";
                             break;
-                        default:
-                            //Do nothing, setting priority is optional
-                            break;
+
                     }
 
                     let taskDeadlineClasses = "";
@@ -98,12 +120,26 @@ $(document).ready(function () {
                         taskDeadlineClasses = "red darken-3";
                     } else if (daysTillDeadline <= 7) {
                         taskDeadlineClasses = "orange darken-3";
-                    } else {
+                    } else if (daysTillDeadline > 7) {
                         taskDeadlineClasses = "green darken-3";
+                    } else {
+                        taskDeadlineClasses = "d-none";
+                    }
+
+                    let taskId = "task-" + task.Id;
+                    let taskCollapseState = false;
+                    let taskCollapseIndicator = "expand_less";
+
+                    if (localStorage.getItem((taskId + "-collapsed")) !== null) {
+                        taskCollapseState = true;
+                        taskCollapseIndicator = "expand_more";
                     }
 
                     let taskFromTemplate = $('#taskTemplate').html()
-                        .replace('##taskID##', task.Id)
+                        .replace('##taskID##', taskId)
+                        .replace('##taskId##', task.Id)
+                        .replace('##taskCollapseState##', taskCollapseState)
+                        .replace('##taskCollapseIndicator##', taskCollapseIndicator)
                         .replace('##taskTitle##', task.Title)
                         .replace('##taskContent##', task.Description)
                         .replace('##taskEstimate##', task.Estimate)
@@ -114,17 +150,14 @@ $(document).ready(function () {
                         .replace('##taskPriorityUrgency##', taskUrgency)
                         .replace('##taskPriorityIcon##', taskPriorityIcon)
                         .replace('##taskPriorityClasses##', taskPriorityClasses)
-                    // .replace('##taskTimestamp##', task.Timestamp);
+                        .replace('##taskPriority##', task.Priority)
+                        .replace('##taskTimestamp##', task.Timestamp);
                     let columnId = '#tasksColumn-' + task.KanbanColumnId;
                     if (columnId === "#tasksColumn-1") {
                         $(taskFromTemplate).appendTo($('#tasksColumn-0'));
                     } else {
                         $(taskFromTemplate).appendTo($(columnId));
-                        // console.log('test');
                     }
-                    // console.log(columnId);
-                    // $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
-                    // $(taskFromTemplate).appendTo($('#tasksColumn-0'));
                 });
             } else {
                 alert('Task API call failed');
@@ -132,5 +165,4 @@ $(document).ready(function () {
         });
 
     });
-    // sendNotification('Hello world!', 1000, 'green');
 });

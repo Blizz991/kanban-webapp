@@ -34,6 +34,16 @@ body {
     padding: 0.5rem 0 1rem;
 }
 
+.column-top-btns{
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.column-top-btns i{
+    font-size: 34px;
+}
+
 .tasks__column-top-container h5 {
     margin: 0;
     line-height: 36px;
@@ -76,8 +86,10 @@ body {
     /* display: flex;
     margin: auto 0 auto 15px; */
     position: fixed;
-    right: 10%;
+    right: 13%;
     top: 50%;
+    padding: 15px;
+    font-size: 34px;
 }
 
 .card-user-img {
@@ -86,10 +98,10 @@ body {
 
 .card-btns {
     display: flex;
-    width: 100%;
     justify-content: space-around;
     background: rgba(0, 0, 0, 0.3);
-    margin-top: 12px;
+    /* width: 100%;
+    margin-top: 12px; */
 }
 
 .card-btns--right>i,
@@ -168,6 +180,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
+    margin-top: 10px;
 }
 
 .card-title,

@@ -29,7 +29,7 @@ function setEditTaskState(editBtn) {
         task.attr('contenteditable', "false");
         btn.data('editing-state', false);
         btn.html('edit');
-        updateTask();
+        updateTask(task);
     }
 }
 
@@ -44,10 +44,16 @@ function triggerTaskCollapseState(collapseBtn) {
         btn.html('expand_less');
         task.data('collapsed-state', false);
         taskContent.slideDown("fast");
+        localStorage.setItem((taskId + "-collapsed"), true);
     } else {
         btn.html('expand_more');
         task.data('collapsed-state', true);
         taskContent.slideUp("fast");
+        localStorage.removeItem((taskId + "-collapsed"));
     }
     //TODO: Save collapse state to web storage
+}
+
+function editColumn(){
+    
 }

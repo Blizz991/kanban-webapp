@@ -18,51 +18,51 @@ function getColumns(callback) {
     });
 };
 
-function postTask(modalId) {
-    let modalEl = $(modalId);
-    let modalInstance = M.Modal.getInstance(modalEl);
 
-    let taskObj = {
-        title: $('#taskTitleInput').val(),
-        userId: $('#taskUserSelect').val(),
-        kanbanColumnId: 1, //Backlog
-        description: $('#taskDescriptionTextArea').val(),
-        estimate: $('#taskEstimateInput').val(),
-        deadline: (moment($('#taskDeadlineDateInput').val() + " " + $('#taskDeadlineTimeInput').val()).toISOString()),
-        priority: $('#taskPrioritySelect').val(),
-    };
+//Used for prototyping (User tests)
+// function postTask(modalId) {
+//     let modalEl = $(modalId);
+//     let modalInstance = M.Modal.getInstance(modalEl);
 
-    let jsonTask = JSON.stringify(taskObj);
-    console.log(jsonTask);
-    $.ajax({
-        url: "https://api.kanban.weibel.dev/api/Task",
-        type: "POST",
-        crossDomain: true,
-        headers: {
-            "Accept": "application/json; charset=utf-8",
-            "Content-Type": "application/json; charset=utf-8"
-        },
-        data: jsonTask,
-        dataType: "json",
-        success: function () {
-            console.log('Successfully added task to API');
-            sendNotification('New task created!', 'green darken-3 white-text');
-            // console.log(response);
-        },
-        error: function (xhr, status) {
-            console.log('Failed adding task to API');
-            sendNotification('There was an error creating the task', 'red darken-3 white-text');
-            // console.log(response);
-        }
-    });
+//     let taskObj = {
+//         title: $('#taskTitleInput').val(),
+//         userId: $('#taskUserSelect').val(),
+//         kanbanColumnId: 1, //Backlog
+//         description: $('#taskDescriptionTextArea').val(),
+//         estimate: $('#taskEstimateInput').val(),
+//         deadline: (moment($('#taskDeadlineDateInput').val() + " " + $('#taskDeadlineTimeInput').val()).toISOString()),
+//         priority: $('#taskPrioritySelect').val(),
+//     };
 
-    modalInstance.close();
-    getTasks
-}
+//     let jsonTask = JSON.stringify(taskObj);
+//     console.log(jsonTask);
+//     $.ajax({
+//         url: "https://api.kanban.weibel.dev/api/Task",
+//         type: "POST",
+//         crossDomain: true,
+//         headers: {
+//             "Accept": "application/json; charset=utf-8",
+//             "Content-Type": "application/json; charset=utf-8"
+//         },
+//         data: jsonTask,
+//         dataType: "json",
+//         success: function () {
+//             console.log('Successfully added task to API');
+//             sendNotification('New task created!', 'green darken-3 white-text');
+//             // console.log(response);
+//         },
+//         error: function (xhr, status) {
+//             console.log('Failed adding task to API');
+//             sendNotification('There was an error creating the task', 'red darken-3 white-text');
+//             // console.log(response);
+//         }
+//     });
+
+//     modalInstance.close();
+// }
 
 //#region Tasks CRUD
-
-function addTask(){
+function addTask() {
     sendNotification('Task added', "green darken-3 white-text");
 }
 function getTasks(callback) {
@@ -88,12 +88,70 @@ function getTasks(callback) {
     });
 };
 
-function updateTask(){
-    sendNotification('Task updated', "green darken-3 white-text");
+function updateTask(task) {
+    let taskToUpdate = new Task(
+        task.data('task-id'),
+        task.find('[data-name="task-title"]').html(),
+        task.parent('section').data('column-id'),
+        $.trim(task.find('[data-name="task-content"]').html().replace('/\r?\n|\r/g', '')), //It was adding random new lines and 
+        task.find('[data-name="task-estimate"]').html(),
+        null, //Not being used currently
+        task.find('[data-name="task-priority"]').html(),
+        task.find('[data-name="task-timestamp"]').data('last-updated') //Timestamp of when the element was last edited
+    );
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/Task/" + taskToUpdate.Id,
+        type: "PUT",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: JSON.stringify(taskToUpdate),
+        success: function (response) {
+            //Delete task from DOM
+            task.find('[data-name="task-timestamp"]').data('last-updated', Task.fromJson(response).Timestamp);
+            sendNotification('Task updated', "green darken-3 white-text");
+        },
+        error: function (xhr, status) {
+            sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
+
 }
 
-function deleteTask() {
-    sendNotification('Task deleted', "red darken-3 white-text");
+function deleteTask(btn) {
+    let task = $(btn).closest('section');
+
+    let taskToUpdate = new Task(
+        task.data('task-id'),
+        task.find('[data-name="task-title"]').html(),
+        task.parent('section').data('column-id'),
+        $.trim(task.find('[data-name="task-content"]').html().replace('/\r?\n|\r/g', '')), //It was adding random new lines and 
+        task.find('[data-name="task-estimate"]').html(),
+        null, //Not being used currently
+        task.find('[data-name="task-priority"]').html(),
+        task.find('[data-name="task-timestamp"]').data('last-updated') //Timestamp of when the element was last edited
+    );
+    console.log(taskToUpdate);
+
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/Task/" + taskToUpdate.Id,
+        type: "DELETE",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: JSON.stringify(taskToUpdate),
+        success: function (response) {
+            task.remove();
+            sendNotification('Task successfully deleted', "green darken-3 white-text");
+        },
+        error: function (xhr, status) {
+            sendNotification("Task changed by another user, try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
 }
 
 //#endregion Tasks CRUD

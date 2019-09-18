@@ -1,7 +1,7 @@
-var Task = function Task(Id, Title, UserId, KanbanColumnId, Description, Estimate, Deadline, Priority, Order, Timestamp) {
+var Task = function Task(Id, Title, /*UserId,*/ KanbanColumnId, Description, Estimate, Deadline, Priority, /*Order, */ Timestamp) {
     this.Id = Id;
     this.Title = Title;
-    this.UserId = UserId;
+    // this.UserId = UserId;
     this.KanbanColumnId = KanbanColumnId;
     this.Description = Description;
     this.Estimate = Estimate;
@@ -15,7 +15,7 @@ Task.fromJson = function (json) {
     return new Task(
         json.id,
         json.title,
-        json.userId,
+        // json.userId,
         json.kanbanColumnId,
         json.description,
         json.estimate,

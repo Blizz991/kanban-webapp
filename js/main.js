@@ -52,23 +52,77 @@ $(document).ready(function () {
             if (tasksList !== null) {
                 // console.log(tasksList);
                 tasksList.forEach(task => {
+                    let taskUrgency = "";
+                    let taskPriorityClasses = "";
+                    let taskPriorityIcon = "";
+                    switch (task.Priority) {
+                        case 1:
+                            taskUrgency = "Urgent";
+                            taskPriorityClasses = "red darken-3";
+                            taskPriorityIcon = "priority_high";
+                            break;
+                        case 2:
+                            taskUrgency = "Soon";
+                            taskPriorityClasses = "red darken-1";
+                            taskPriorityIcon = "priority_high";
+                            break;
+                        case 3:
+                            taskUrgency = "When possible";
+                            taskPriorityClasses = "orange darken-3";
+                            taskPriorityIcon = "low_priority";
+                            break;
+                        case 4:
+                            taskUrgency = "If possible";
+                            taskPriorityClasses = "orange darken-1";
+                            taskPriorityIcon = "low_priority";
+                            break;
+                        case 5:
+                            taskUrgency = "If time allows";
+                            taskPriorityClasses = "green darken-3";
+                            taskPriorityIcon = "timelapse";
+                            break;
+                        case 6:
+                            taskUrgency = "At some point";
+                            taskPriorityClasses = "green darken-1";
+                            taskPriorityIcon = "timer_off";
+                            break;
+                        default:
+                            //Do nothing, setting priority is optional
+                            break;
+                    }
+
+                    let taskDeadlineClasses = "";
+                    let daysTillDeadline = moment(task.Deadline).diff(moment(), 'days');
+
+                    if (daysTillDeadline <= 2) {
+                        taskDeadlineClasses = "red darken-3";
+                    } else if (daysTillDeadline <= 7) {
+                        taskDeadlineClasses = "orange darken-3";
+                    } else {
+                        taskDeadlineClasses = "green darken-3";
+                    }
+
                     let taskFromTemplate = $('#taskTemplate').html()
                         .replace('##taskID##', task.Id)
                         .replace('##taskTitle##', task.Title)
                         .replace('##taskContent##', task.Description)
                         .replace('##taskEstimate##', task.Estimate)
-                        // .replace('##taskDeadline##',  moment(task.Deadline).format("Do of MMM. YY, hh:mm A"))
-                        .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) //Use above once tooltip works
-                        .replace('##taskPriority##', task.Priority)
+                        .replace('##taskDeadline##', moment(task.Deadline).format("DD/M-YY"))
+                        .replace('##taskDeadlineClasses##', taskDeadlineClasses)
+                        .replace('##taskDeadlineFormatted##', moment(task.Deadline).format("Do of MMM. YYYY"))
+                        // .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) 
+                        .replace('##taskPriorityUrgency##', taskUrgency)
+                        .replace('##taskPriorityIcon##', taskPriorityIcon)
+                        .replace('##taskPriorityClasses##', taskPriorityClasses)
                     // .replace('##taskTimestamp##', task.Timestamp);
                     let columnId = '#tasksColumn-' + task.KanbanColumnId;
                     if (columnId === "#tasksColumn-1") {
                         $(taskFromTemplate).appendTo($('#tasksColumn-0'));
                     } else {
                         $(taskFromTemplate).appendTo($(columnId));
-                        console.log('test');
+                        // console.log('test');
                     }
-                    console.log(columnId);
+                    // console.log(columnId);
                     // $(taskFromTemplate).appendTo($('#tasksBacklogColumn'));
                     // $(taskFromTemplate).appendTo($('#tasksColumn-0'));
                 });
@@ -78,7 +132,5 @@ $(document).ready(function () {
         });
 
     });
-
-    $('.tooltipped').tooltip();
     // sendNotification('Hello world!', 1000, 'green');
 });

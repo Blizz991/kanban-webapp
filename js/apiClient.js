@@ -1,23 +1,3 @@
-function getTasks(callback) {
-    $.ajax({
-        url: "https://api.kanban.weibel.dev/api/Task",
-        type: "GET",
-        crossDomain: true,
-        dataType: "json",
-        success: function (response) {
-            let tasksList = [];
-            response.forEach(task => {
-                tasksList.push(Task.fromJson(task));
-            });
-            console.log('Successfully pulled tasks from API');
-            callback(tasksList);
-        },
-        error: function (xhr, status) {
-            callback(null);
-        }
-    });
-};
-
 function getColumns(callback) {
     $.ajax({
         url: "https://api.kanban.weibel.dev/api/KanbanColumns",
@@ -77,4 +57,43 @@ function postTask(modalId) {
     });
 
     modalInstance.close();
+    getTasks
 }
+
+//#region Tasks CRUD
+
+function addTask(){
+    sendNotification('Task added', "green darken-3 white-text");
+}
+function getTasks(callback) {
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/Task",
+        type: "GET",
+        crossDomain: true,
+        dataType: "json",
+        success: function (response) {
+            let tasksList = [];
+            response.forEach(task => {
+                tasksList.push(Task.fromJson(task));
+            });
+            console.log('Successfully pulled tasks from API');
+            callback(tasksList);
+
+            //Initialize tooltips
+            $('.tooltipped').tooltip();
+        },
+        error: function (xhr, status) {
+            callback(null);
+        }
+    });
+};
+
+function updateTask(){
+    sendNotification('Task updated', "green darken-3 white-text");
+}
+
+function deleteTask() {
+    sendNotification('Task deleted', "red darken-3 white-text");
+}
+
+//#endregion Tasks CRUD

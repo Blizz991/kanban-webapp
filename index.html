@@ -33,12 +33,11 @@
                     <h5 class="fw-600 card-title">Backlog</h5>
                 </div>
             </section> -->
-            <i class="add-column-btn material-icons icon icon-bg">add</i>
         </div>
     </div>
     <!-- #endregion Content -->
     <!-- #region Toolbar -->
-    <div class="fixed-action-btn">
+    <!-- <div class="fixed-action-btn">
         <a class="btn-floating btn-large red sidenav-trigger" data-target="slide-out">
             <i class="material-icons">menu</i>
         </a>
@@ -62,7 +61,7 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div> -->
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
@@ -82,8 +81,11 @@
 
         </section>
     </template>
-    <template id="tasksColumnAddNewTaskBtn">
+    <template id="addNewTaskBtnTemplate">
         <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
+    </template>
+    <template id="addNewColumnBtnTemplate">
+            <i class="add-column-btn material-icons icon icon-bg">add</i>
     </template>
     <template id="taskTemplate">
         <section id="##taskID##" data-task-id="##taskId##" contenteditable="false"
@@ -110,13 +112,13 @@
                     <i contenteditable="false" class="material-icons">##taskPriorityIcon##</i>
                     <span data-name="task-priority" contenteditable="true">##taskPriority##</span>
                 </span>
-                <div contenteditable="false" class="card-btns">
-                    <i onclick="confirm('Are you sure you want to delete the task?')?deleteTask(this):'';" class="material-icons icon mr-a">delete_forever</i>
+                <div contenteditable="false" class="card-btns">                    
                     <i onclick="setEditTaskState(this);" data-name="task-timestamp"
                         data-last-updated="##taskTimestamp##" data-editing-state="false"
                         class="material-icons icon tooltipped" data-tooltip="Toggle editing"
                         data-position="bottom">edit</i>
-                    <img class="icon drag-handle column-drag-handle" src="images/move-icon.svg" alt="||">
+                        <i onclick="confirm('Are you sure you want to delete the task?')?deleteTask(this):'';" class="material-icons icon mr-a">delete_forever</i>
+                    <!-- <img class="icon drag-handle column-drag-handle" src="images/move-icon.svg" alt="||"> -->
                 </div>
 
                 <!-- <span>Created: ##taskTimestamp##</span> -->

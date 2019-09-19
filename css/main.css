@@ -13,6 +13,7 @@ body {
     flex-wrap: nowrap;
     overflow-x: auto;
     justify-content: left;
+    align-items: center;
 }
 
 .tasks__column {
@@ -29,22 +30,18 @@ body {
     /* border: 1px solid #000; */
 }
 
-.tasks__column-top-container > h5.card-title {
-    width: unset;
-}
-
 .tasks__column-top-container {
     display: flex;
     padding: 0.5rem 0 1rem;
 }
 
-.column-top-btns{
+.column-top-btns {
     display: flex;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
 }
 
-.column-top-btns i{
+.column-top-btns i {
     font-size: 34px;
 }
 
@@ -88,12 +85,16 @@ body {
 
 .add-column-btn {
     /* display: flex;
-    margin: auto 0 auto 15px; */
+    margin: auto 0 auto 15px;
     position: fixed;
     right: 13%;
     top: 50%;
     padding: 15px;
+    font-size: 34px; */
+    padding: 15px;
     font-size: 34px;
+    height: 64px;
+    width: 64px;
 }
 
 .card-user-img {
@@ -192,11 +193,11 @@ body {
     margin: 0;
 }
 
-.card-title{
+.card-title {
     width: 95%;
 }
 
-.card p{
+.card p {
     width: 100%;
 }
 

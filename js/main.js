@@ -30,8 +30,13 @@ $(document).ready(function () {
             });
 
             //Insert add task button into first column
-            let addTaskBtn = $('#tasksColumnAddNewTaskBtn').html();
+            let addTaskBtn = $('#addNewTaskBtnTemplate').html();
             $(addTaskBtn).appendTo($('[data-order="0"]').find('.column-top-btns'));
+
+
+            let addColumnBtn = $('#addNewColumnBtnTemplate').html();
+            $(addColumnBtn).appendTo($('#mainColumnContainer'));
+            
 
             $('.tasks__row').sortable({
                 group: 'row',
@@ -61,7 +66,7 @@ $(document).ready(function () {
                 group: 'column',
                 animation: 250,
                 ghostClass: 'grey',
-                handle: ".column-drag-handle",
+                // handle: ".column-drag-handle",
                 onEnd: function (evt) {
                     var itemEl = evt.item;  // dragged HTMLElement
                     if (evt.to !== evt.from) {
@@ -123,18 +128,18 @@ $(document).ready(function () {
 
                     }
                     // if (task.Deadline !== null) {
-                        let taskDeadlineClasses = "";
-                        let daysTillDeadline = moment(task.Deadline).diff(moment(), 'days');
+                    let taskDeadlineClasses = "";
+                    let daysTillDeadline = moment(task.Deadline).diff(moment(), 'days');
 
-                        if (daysTillDeadline <= 2) {
-                            taskDeadlineClasses = "red darken-3";
-                        } else if (daysTillDeadline <= 7) {
-                            taskDeadlineClasses = "orange darken-3";
-                        } else if (daysTillDeadline > 7) {
-                            taskDeadlineClasses = "green darken-3";
-                        } else {
-                            taskDeadlineClasses = "d-none";
-                        }
+                    if (daysTillDeadline <= 2) {
+                        taskDeadlineClasses = "red darken-3";
+                    } else if (daysTillDeadline <= 7) {
+                        taskDeadlineClasses = "orange darken-3";
+                    } else if (daysTillDeadline > 7) {
+                        taskDeadlineClasses = "green darken-3";
+                    } else {
+                        taskDeadlineClasses = "d-none";
+                    }
                     // }
 
                     let taskId = "task-" + task.Id;
@@ -167,14 +172,13 @@ $(document).ready(function () {
                     // if (columnId === "#tasksColumn-1") {
                     //     $(taskFromTemplate).appendTo($('#tasksColumn-0'));
                     // } else {
-                        $(taskFromTemplate).appendTo($(columnId));
+                    $(taskFromTemplate).appendTo($(columnId));
                     // }
                 });
             } else {
                 alert('Task API call failed');
             }
-            $('.tooltipped').tooltip();
         });
-        
+
     });
 });

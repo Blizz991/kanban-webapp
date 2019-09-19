@@ -1,24 +1,3 @@
-function getColumns(callback) {
-    $.ajax({
-        url: "https://api.kanban.weibel.dev/api/KanbanColumns",
-        type: "GET",
-        crossDomain: true,
-        dataType: "json",
-        success: function (response) {
-            let columnList = [];
-            response.forEach(column => {
-                columnList.push(KanbanColumn.fromJson(column));
-            });
-            console.log('Successfully pulled columns from API');
-            callback(columnList);
-        },
-        error: function (xhr, status) {
-            callback(null);
-        }
-    });
-};
-
-
 //Used for prototyping (User tests)
 // function postTask(modalId) {
 //     let modalEl = $(modalId);
@@ -62,10 +41,13 @@ function getColumns(callback) {
 // }
 
 //#region Columns CRUD
-function addColumn(){
+function addColumn() {
+    let modalEl = $('#columnModal');
+    let modalInstance = M.Modal.getInstance(modalEl);
+
     let columnObj = {
-        name: "New column title",
-        color: "black white-text",
+        name: $('#columnTitleInput').val(),
+        color: $('#columnBackgroundColorSelect').val() + " " + $('#columnTextColorSelect').val(),
         order: $('[data-order]').last().data('order') + 1, //Put it at the end of the list
     };
 
@@ -89,6 +71,42 @@ function addColumn(){
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
         }
     });
+
+    modalInstance.close();
+    resetColumnModal();
+}
+
+function getColumns(callback) {
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/KanbanColumns",
+        type: "GET",
+        crossDomain: true,
+        dataType: "json",
+        success: function (response) {
+            let columnList = [];
+            response.forEach(column => {
+                columnList.push(KanbanColumn.fromJson(column));
+            });
+            console.log('Successfully pulled columns from API');
+            callback(columnList);
+        },
+        error: function (xhr, status) {
+            callback(null);
+        }
+    });
+};
+
+function updateColumn(){
+
+}
+
+function updateColumnsOrder(){
+
+}
+
+function deleteColumn() {
+    //TODO: Whine at Stefan because API fails when trying to delete columns
+    alert('API broke...');
 }
 //#endregion Columns CRUD
 
@@ -117,14 +135,14 @@ function addTask() {
         dataType: "json",
         success: function (response) {
             //Add task to DOM
-            sendNotification('Task added', "green darken-3 white-text");
+            sendNotification('Task added, please refresh the page.', "green darken-3 white-text");
         },
         error: function (xhr, status) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
         }
     });
-
 }
+
 function getTasks(callback) {
     $.ajax({
         url: "https://api.kanban.weibel.dev/api/Task",
@@ -177,7 +195,6 @@ function updateTask(task) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
         }
     });
-
 }
 
 function deleteTask(btn) {

@@ -4,9 +4,34 @@ var allTasks;
 $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.fixed-action-btn').floatingActionButton();
+    var $box = $('#columnBackgroundColorPicker');
     $('.modal').modal({
-        dismissible: false,
-        endingTop: '2%'
+        // Didn't manage to get Tiny Color Picker working sadly.
+        // onOpenStart: function () {
+        //     // Initialize a colorpicker like this.
+        //     //
+        //     var $box = $('#columnBackgroundColorPicker');
+        //     $box.tinycolorpicker();
+
+        //     // Try this to get access to the actual colorpicker instance.
+        //     //
+        //     var box = $box.data("plugin_tinycolorpicker");
+
+        //     // Now you have access to all the methods and properties.
+        //     //
+        //     // box.setColor("#cccccc");
+        //     // console.log(box.colorRGB);
+        //     //
+        //     // etc..
+
+        //     // You can bind to the change event like this.
+        //     //
+        //     $box.bind("change", function () {
+        //         console.log("do something when a new color is set");
+        //     });
+        // }
+        // dismissible: false,
+        // endingTop: '2%'
     });
     $('select').formSelect();
     $('.datepicker').datepicker();
@@ -23,6 +48,7 @@ $(document).ready(function () {
                     .replace('##tasksColumnId##', column.Id)
                     .replace('##tasksColumnTitle##', column.Name)
                     .replace('##tasksColumnClasses##', column.Color)
+                    .replace('##tasksColumnColors##', column.Color)
                     .replace('##tasksColumnOrder##', column.Order);
                 // .replace('##taskTimestamp##', column.Timestamp);
 
@@ -36,14 +62,14 @@ $(document).ready(function () {
 
             let addColumnBtn = $('#addNewColumnBtnTemplate').html();
             $(addColumnBtn).appendTo($('#mainColumnContainer'));
-            
+
 
             $('.tasks__row').sortable({
                 group: 'row',
                 animation: 250,
                 ghostClass: 'grey',
                 handle: ".row-drag-handle",
-                onStart: function(){
+                onStart: function () {
                     $('.tooltipped').tooltip('close');
                 },
                 onEnd: function (evt) {
@@ -72,7 +98,7 @@ $(document).ready(function () {
                 ghostClass: 'grey',
                 // filter: ".tasks__column-top-container", //We don't want the top part of columns be dragable like tasks.
                 handle: ".column-drag-handle",
-                onStart: function(){
+                onStart: function () {
                     $('.tooltipped').tooltip('close');
                 },
                 onEnd: function (evt) {

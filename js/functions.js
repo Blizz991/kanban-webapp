@@ -54,6 +54,25 @@ function triggerTaskCollapseState(collapseBtn) {
     //TODO: Save collapse state to web storage
 }
 
-function editColumn(){
-    
+function editColumn(column){
+    $('#columnModalTitle').html('Editing a column');
+}
+
+function prepareColumnModal(){
+    $('#columnModalTitle').html('Creating new column');
+}
+
+function resetColumnModal(){
+    $('#columnPreviewTitle').html("Preview title");
+    // $('#columnPreview').attr('class', 'card preview-card');
+    // $('#columnTitleInput').val("");
+    // $('#columnBackgroundColorSelect').val("");
+    // $('#columnBackgroundColorSelect').val("");
+}
+
+function updateColumnPreview(){
+    $('#columnPreviewTitle').html($('#columnTitleInput').val());
+    $('#columnPreview').attr('class', 'card preview-card')
+    .addClass($('#columnBackgroundColorSelect').val())
+    .addClass($('#columnTextColorSelect').val());
 }

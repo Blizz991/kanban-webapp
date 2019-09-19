@@ -128,6 +128,14 @@ body {
     color: #fff;
 }
 
+.preview-card {
+    padding: 2rem;
+}
+
+.preview-title {
+    margin: 0 0 1rem;
+}
+
 /* #region Helpers */
 .ml-a {
     margin-left: auto;
@@ -227,9 +235,17 @@ span.badge>.material-icons {
 } */
 
 /* Temporary workaround for broken modals */
-.timepicker-modal,
+/* .timepicker-modal,
 .datepicker-modal {
     height: 100%;
+} */
+
+.modal-footer {
+    /* position: sticky;
+    bottom: 0; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 /* label color */

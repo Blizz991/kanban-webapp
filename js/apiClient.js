@@ -96,12 +96,82 @@ function getColumns(callback) {
     });
 };
 
-function updateColumn(){
-
+function updateColumn(editingColumn) {
+    let column = $(editingColumn);
+    // console.log($(column).data('column-id'));
+    let columnId = column.data('column-id');
+    let columnToUpdate = new KanbanColumn(
+        columnId,
+        $('#columnTitleInput').val(),
+        $('#columnBackgroundColorSelect').val() + " " + $('#columnTextColorSelect').val(),
+        column.data('order'),
+        column.data('last-updated') //Timestamp of when the element was last edited
+    );
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/KanbanColumns/" + columnToUpdate.Id,
+        type: "PUT",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: JSON.stringify(columnToUpdate),
+        success: function (response) {
+            sendNotification('Column successfully updated', "green darken-3 white-text");
+            let updatedColumn = KanbanColumn.fromJson(response);
+            column.data('name', updatedColumn.Name);
+            column.data('classes', updatedColumn.Color);
+            column.data('order', updatedColumn.Order)
+            column.data('last-updated', updatedColumn.Timestamp);
+        },
+        error: function (xhr, status) {
+            sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
 }
 
-function updateColumnsOrder(){
+function updateColumnOrder(editingColumn) {
+    let column = $(editingColumn);
+    // console.log($(column).data('column-id'));
+    let columnId = column.data('column-id');
+    let columnToUpdate = new KanbanColumn(
+        columnId,
+        column.data('name'),
+        column.data('classes'),
+        column.data('order'),
+        column.data('last-updated') //Timestamp of when the element was last edited
+    );
+    // console.log(columnToUpdate);
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/KanbanColumns/" + columnToUpdate.Id,
+        type: "PUT",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: JSON.stringify(columnToUpdate),
+        success: function (response) {
+            column.data('last-updated', KanbanColumn.fromJson(response).Timestamp);
+        },
+        error: function (xhr, status) {
+            sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
+}
 
+function updateColumnsOrder() {
+    //TODO: logic for updating column order
+    // console.log($('.tasks__column'));
+
+    $('.tasks__column').each(function (i) {
+        console.log(this);
+        $(this).data('order', i)
+        // console.log($(this).data('order'));
+        updateColumnOrder(this);
+    });
+
+    sendNotification('Columns updated', "green darken-3 white-text");
 }
 
 function deleteColumn() {
@@ -187,7 +257,7 @@ function updateTask(task) {
         },
         data: JSON.stringify(taskToUpdate),
         success: function (response) {
-            //Delete task from DOM
+            //Update timestamp in DOM
             task.find('[data-name="task-timestamp"]').data('last-updated', Task.fromJson(response).Timestamp);
             sendNotification('Task updated', "green darken-3 white-text");
         },
@@ -222,6 +292,7 @@ function deleteTask(btn) {
         },
         data: JSON.stringify(taskToUpdate),
         success: function (response) {
+            //Delete task from DOM
             task.remove();
             sendNotification('Task successfully deleted', "green darken-3 white-text");
         },

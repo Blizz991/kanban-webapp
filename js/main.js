@@ -47,11 +47,12 @@ $(document).ready(function () {
                     .replace('##tasksColumnID##', column.Id)
                     .replace('##tasksColumnId##', column.Id)
                     .replace('##tasksColumnTitle##', column.Name)
+                    .replace('##tasksColumnName##', column.Name)
                     .replace('##tasksColumnClasses##', column.Color)
+                    .replace('##tasksColumnDataClasses##', column.Color)
                     .replace('##tasksColumnColors##', column.Color)
-                    .replace('##tasksColumnOrder##', column.Order);
-                // .replace('##taskTimestamp##', column.Timestamp);
-
+                    .replace('##tasksColumnOrder##', column.Order)
+                    .replace('##tasksColumnTimestamp##', column.Timestamp);
                 $(columnFromTemplate).appendTo($('#mainColumnContainer'));
             });
 
@@ -74,7 +75,10 @@ $(document).ready(function () {
                 },
                 onEnd: function (evt) {
                     var itemEl = evt.item;  // dragged HTMLElement
-                    sendNotification("Column ordering doesn't save currently.", "blue lighten-2");
+                    if (evt.oldIndex !== evt.newIndex) {
+                        updateColumnsOrder();
+                    }
+                    // sendNotification("Column ordering doesn't save currently.", "blue lighten-2");
                     // if (evt.to !== evt.from) {
                     //     updateTask($(itemEl));
                     // }

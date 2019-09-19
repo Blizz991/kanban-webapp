@@ -60,15 +60,15 @@
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <section id="tasksColumn-##tasksColumnID##" data-order="##tasksColumnOrder##" data-classes="##tasksColumnColors##" data-column-id="##tasksColumnId##"
+        <section id="tasksColumn-##tasksColumnID##" data-name="##tasksColumnName##" data-classes="##tasksColumnDataClasses##" data-order="##tasksColumnOrder##" data-last-updated="##tasksColumnTimestamp##" data-classes="##tasksColumnColors##" data-column-id="##tasksColumnId##"
             class="tasks__column card ##tasksColumnClasses##">
             <div class="tasks__column-top-container">
-                <h5 class="fw-600 card-title ##tasksColumnTitleClasses##">##tasksColumnTitle##</h5>
+                <h5 class="fw-600 card-title">##tasksColumnTitle##</h5>
                 <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
                             <i class="material-icons">edit</i>
                         </a> -->
                 <div class="column-top-btns">
-                    <i onclick="editColumn('');"
+                    <i onclick="editColumn(this);"
                         class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped"
                         data-tooltip="Edit column" data-position="bottom">edit</i>
                     <img class="drag-handle icon row-drag-handle tooltipped" data-tooltip="Drag to reorder"

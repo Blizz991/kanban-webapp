@@ -173,7 +173,8 @@ $(document).ready(function () {
             } else {
                 alert('Task API call failed');
             }
+            $('.tooltipped').tooltip();
         });
-
+        
     });
 });

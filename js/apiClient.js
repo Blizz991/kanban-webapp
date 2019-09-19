@@ -63,7 +63,36 @@ function getColumns(callback) {
 
 //#region Tasks CRUD
 function addTask() {
-    sendNotification('Task added', "green darken-3 white-text");
+    let taskObj = {
+        title: "New task title",
+        kanbanColumnId: 1, //Backlog
+        description: "New task description",
+        estimate: 0,
+        // deadline: (moment($('#taskDeadlineDateInput').val() + " " + $('#taskDeadlineTimeInput').val()).toISOString()),
+        priority: 6,
+    };
+
+    let jsonTask = JSON.stringify(taskObj);
+
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/Task",
+        type: "POST",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: jsonTask,
+        dataType: "json",
+        success: function (response) {
+            //Add task to DOM
+            sendNotification('Task added', "green darken-3 white-text");
+        },
+        error: function (xhr, status) {
+            sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
+
 }
 function getTasks(callback) {
     $.ajax({

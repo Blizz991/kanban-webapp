@@ -28,16 +28,11 @@
     <!-- #region Content -->
     <div class="wrapper">
         <div id="mainColumnContainer" class="tasks__row">
-            <section id="tasksColumn-0" class="tasks__column card backlog purple lighten-2">
+            <!-- <section id="tasksColumn-0" class="tasks__column card backlog purple lighten-2">
                 <div class="tasks__column-top-container">
                     <h5 class="fw-600 card-title">Backlog</h5>
-                    <div class="column-top-btns">
-                        <i onclick="editColumn('tasksColumn-0');"
-                            class="material-icons icon mr-5 rounded waves-effect waves-dark">edit</i>
-                        <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
-                    </div>
                 </div>
-            </section>
+            </section> -->
             <i class="add-column-btn material-icons icon icon-bg">add</i>
         </div>
     </div>
@@ -71,19 +66,28 @@
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <section id="tasksColumn-##tasksColumnID##" data-column-id="##tasksColumnId##" class="tasks__column card ##tasksColumnClasses##">
+        <section id="tasksColumn-##tasksColumnID##" data-order="##tasksColumnOrder##" data-column-id="##tasksColumnId##"
+            class="tasks__column card ##tasksColumnClasses##">
             <div class="tasks__column-top-container">
                 <h5 class="fw-600 card-title ##tasksColumnTitleClasses##">##tasksColumnTitle##</h5>
                 <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
                             <i class="material-icons">edit</i>
                         </a> -->
+                <div class="column-top-btns">
+                    <i onclick="editColumn('');"
+                        class="material-icons icon mr-5 rounded waves-effect waves-dark">edit</i>
+                    <img class="drag-handle icon row-drag-handle" src="images/move-icon.svg" alt="">
+                </div>
             </div>
-            <img class="drag-handle icon icon-bg row-drag-handle" src="images/move-icon.svg" alt="">
+
         </section>
     </template>
+    <template id="tasksColumnAddNewTaskBtn">
+        <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
+    </template>
     <template id="taskTemplate">
-        <section id="##taskID##" data-task-id="##taskId##" contenteditable="false" data-collapsed-state="##taskCollapseState##"
-            class="card small">
+        <section id="##taskID##" data-task-id="##taskId##" contenteditable="false"
+            data-collapsed-state="##taskCollapseState##" class="card small">
             <!-- <section id="##taskID##" contenteditable="false" data-collapsed-state="##taskCollapseState##"
             data-task-userId="##taskUserId##" class="card small"> -->
             <i onclick="triggerTaskCollapseState(this);"
@@ -107,8 +111,9 @@
                     <span data-name="task-priority" contenteditable="true">##taskPriority##</span>
                 </span>
                 <div contenteditable="false" class="card-btns">
-                    <i onclick="deleteTask(this);" class="material-icons icon mr-a">delete_forever</i>
-                    <i onclick="setEditTaskState(this);" data-name="task-timestamp" data-last-updated="##taskTimestamp##" data-editing-state="false"
+                    <i onclick="confirm('Are you sure you want to delete the task?')?deleteTask(this):'';" class="material-icons icon mr-a">delete_forever</i>
+                    <i onclick="setEditTaskState(this);" data-name="task-timestamp"
+                        data-last-updated="##taskTimestamp##" data-editing-state="false"
                         class="material-icons icon tooltipped" data-tooltip="Toggle editing"
                         data-position="bottom">edit</i>
                     <img class="icon drag-handle column-drag-handle" src="images/move-icon.svg" alt="||">

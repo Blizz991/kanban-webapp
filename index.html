@@ -60,8 +60,10 @@
     <!-- #endregion Toolbar -->
     <!-- #region Templates -->
     <template id="tasksColumnTemplate">
-        <section id="tasksColumn-##tasksColumnID##" data-name="##tasksColumnName##" data-classes="##tasksColumnDataClasses##" data-order="##tasksColumnOrder##" data-last-updated="##tasksColumnTimestamp##" data-classes="##tasksColumnColors##" data-column-id="##tasksColumnId##"
-            class="tasks__column card ##tasksColumnClasses##">
+        <section id="tasksColumn-##tasksColumnID##" data-name="##tasksColumnName##"
+            data-classes="##tasksColumnDataClasses##" data-order="##tasksColumnOrder##"
+            data-last-updated="##tasksColumnTimestamp##" data-classes="##tasksColumnColors##"
+            data-column-id="##tasksColumnId##" class="tasks__column card ##tasksColumnClasses##">
             <div class="tasks__column-top-container">
                 <h5 class="fw-600 card-title">##tasksColumnTitle##</h5>
                 <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
@@ -71,6 +73,10 @@
                     <i onclick="editColumn(this);"
                         class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped"
                         data-tooltip="Edit column" data-position="bottom">edit</i>
+                    <!-- TODO: Fix editing columns -->
+                    <!-- <i data-target="columnModal" onclick="editColumn(this);"
+                        class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped modal-trigger"
+                        data-tooltip="Edit column" data-position="bottom">edit</i> -->
                     <img class="drag-handle icon row-drag-handle tooltipped" data-tooltip="Drag to reorder"
                         data-position="bottom" src="images/move-icon.svg" alt="">
                 </div>
@@ -119,7 +125,8 @@
         <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
     </template>
     <template id="addNewColumnBtnTemplate">
-        <i data-target="columnModal" onclick="prepareColumnModal();" class="add-column-btn material-icons icon icon-bg modal-trigger">add</i>
+        <i data-target="columnModal" onclick="prepareColumnModal();"
+            class="add-column-btn material-icons icon icon-bg modal-trigger">add</i>
     </template>
     <!-- #endregion Templates -->
     <!-- #region Modals -->
@@ -214,7 +221,8 @@
             <h4 id="columnModalTitle">Creating new column</h4>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input placeholder="Column title" id="columnTitleInput" onkeyup="updateColumnPreview();" type="text" class="validate">
+                    <input placeholder="Column title" id="columnTitleInput" onkeyup="updateColumnPreview();" type="text"
+                        class="validate">
                     <label for="columnTitleInput">Column Title</label>
                 </div>
             </div>
@@ -226,7 +234,7 @@
                                 <ul class="dropdown"><li></li></ul>
                                 <input type="hidden" class="colorInput"/>
                         </div> -->
-                        <!-- TODO: Figure out a UX friendly way to allow using these colors: https://materializecss.com/color.html -->
+                    <!-- TODO: Figure out a UX friendly way to allow using these colors: https://materializecss.com/color.html -->
                     <select id="columnBackgroundColorSelect" onchange="updateColumnPreview();" class="validate">
                         <option value="" disabled selected>Background color</option>
                         <option value="black" data-icon="https://placehold.it/32/000000/000000" class="left">

@@ -54,15 +54,29 @@ function triggerTaskCollapseState(collapseBtn) {
     //TODO: Save collapse state to web storage
 }
 
-function editColumn(column){
-    $('#columnModalTitle').html('Editing a column');
+function editColumn(editBtn) {
+    sendNotification('Sorry, I haven\'t finished editing of columns.', "blue lighten-2");
+    //TODO: Fix editing columns
+    // let editingColumn = $(editBtn.closest('section'));
+    // // console.log(editingColumn);
+
+    // //Split classes
+    // let classArray = editingColumn.data('classes').split(" ");
+
+    // $('#columnModalTitle').html('Editing a column');
+    // $('#columnTitleInput').val(editingColumn.data('name'));
+    // $('#columnBackgroundColorSelect').val(classArray[0]).change(); //First class will always be the background color
+    // $('#columnBackgroundColorSelect').val(classArray[1]).change(); //Second class will always be the text color
+
+    // //Reinitialize dropdown to force update the selected value
+    // $('select').select();
 }
 
-function prepareColumnModal(){
+function prepareColumnModal() {
     $('#columnModalTitle').html('Creating new column');
 }
 
-function resetColumnModal(){
+function resetColumnModal() {
     $('#columnPreviewTitle').html("Preview title");
     // $('#columnPreview').attr('class', 'card preview-card');
     // $('#columnTitleInput').val("");
@@ -70,9 +84,9 @@ function resetColumnModal(){
     // $('#columnBackgroundColorSelect').val("");
 }
 
-function updateColumnPreview(){
+function updateColumnPreview() {
     $('#columnPreviewTitle').html($('#columnTitleInput').val());
     $('#columnPreview').attr('class', 'card preview-card')
-    .addClass($('#columnBackgroundColorSelect').val())
-    .addClass($('#columnTextColorSelect').val());
+        .addClass($('#columnBackgroundColorSelect').val())
+        .addClass($('#columnTextColorSelect').val());
 }

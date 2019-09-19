@@ -43,11 +43,15 @@ $(document).ready(function () {
                 animation: 250,
                 ghostClass: 'grey',
                 handle: ".row-drag-handle",
+                onStart: function(){
+                    $('.tooltipped').tooltip('close');
+                },
                 onEnd: function (evt) {
                     var itemEl = evt.item;  // dragged HTMLElement
-                    if (evt.to !== evt.from) {
-                        updateTask($(itemEl));
-                    }
+                    sendNotification("Column ordering doesn't save currently.", "blue lighten-2");
+                    // if (evt.to !== evt.from) {
+                    //     updateTask($(itemEl));
+                    // }
                     // evt.to;    // target list
                     // evt.from;  // previous list
                     // evt.oldIndex;  // element's old index within old parent
@@ -66,9 +70,13 @@ $(document).ready(function () {
                 group: 'column',
                 animation: 250,
                 ghostClass: 'grey',
-                // handle: ".column-drag-handle",
+                // filter: ".tasks__column-top-container", //We don't want the top part of columns be dragable like tasks.
+                handle: ".column-drag-handle",
+                onStart: function(){
+                    $('.tooltipped').tooltip('close');
+                },
                 onEnd: function (evt) {
-                    var itemEl = evt.item;  // dragged HTMLElement
+                    let itemEl = evt.item;  // dragged HTMLElement
                     if (evt.to !== evt.from) {
                         updateTask($(itemEl));
                     }

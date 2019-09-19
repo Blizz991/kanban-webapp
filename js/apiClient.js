@@ -61,6 +61,37 @@ function getColumns(callback) {
 //     modalInstance.close();
 // }
 
+//#region Columns CRUD
+function addColumn(){
+    let columnObj = {
+        name: "New column title",
+        color: "black white-text",
+        order: $('[data-order]').last().data('order') + 1, //Put it at the end of the list
+    };
+
+    let jsonColumn = JSON.stringify(columnObj);
+
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/KanbanColumns",
+        type: "POST",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: jsonColumn,
+        dataType: "json",
+        success: function (response) {
+            //Add task to DOM
+            sendNotification('Column added', "green darken-3 white-text");
+        },
+        error: function (xhr, status) {
+            sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
+        }
+    });
+}
+//#endregion Columns CRUD
+
 //#region Tasks CRUD
 function addTask() {
     let taskObj = {

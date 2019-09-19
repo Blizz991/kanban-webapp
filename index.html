@@ -74,24 +74,23 @@
                         </a> -->
                 <div class="column-top-btns">
                     <i onclick="editColumn('');"
-                        class="material-icons icon mr-5 rounded waves-effect waves-dark">edit</i>
-                    <img class="drag-handle icon row-drag-handle" src="images/move-icon.svg" alt="">
+                        class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped" data-tooltip="Edit column"
+                        data-position="bottom">edit</i>
+                    <img class="drag-handle icon row-drag-handle tooltipped" data-tooltip="Drag to reorder"
+                    data-position="bottom" src="images/move-icon.svg" alt="">
                 </div>
             </div>
-
         </section>
     </template>
     <template id="addNewTaskBtnTemplate">
         <i onclick="addTask();" class="material-icons icon rounded waves-effect waves-dark">add</i>
     </template>
     <template id="addNewColumnBtnTemplate">
-            <i class="add-column-btn material-icons icon icon-bg">add</i>
+            <i onclick="addColumn();" class="add-column-btn material-icons icon icon-bg">add</i>
     </template>
     <template id="taskTemplate">
         <section id="##taskID##" data-task-id="##taskId##" contenteditable="false"
             data-collapsed-state="##taskCollapseState##" class="card small">
-            <!-- <section id="##taskID##" contenteditable="false" data-collapsed-state="##taskCollapseState##"
-            data-task-userId="##taskUserId##" class="card small"> -->
             <i onclick="triggerTaskCollapseState(this);"
                 class="material-icons collapse-trigger icon icon-bg">##taskCollapseIndicator##</i>
             <h6 data-name="task-title" class="card-title">##taskTitle##</h6>
@@ -118,13 +117,12 @@
                         class="material-icons icon tooltipped" data-tooltip="Toggle editing"
                         data-position="bottom">edit</i>
                         <i onclick="confirm('Are you sure you want to delete the task?')?deleteTask(this):'';" class="material-icons icon mr-a">delete_forever</i>
-                    <!-- <img class="icon drag-handle column-drag-handle" src="images/move-icon.svg" alt="||"> -->
+                    <img class="icon drag-handle column-drag-handle tooltipped" data-tooltip="Drag to move"
+                    data-position="bottom"  src="images/move-icon.svg" alt="||">
                 </div>
-
                 <!-- <span>Created: ##taskTimestamp##</span> -->
                 <!-- <img class="rounded card-user-img" src="https://placehold.it/32" alt=""> -->
             </article>
-
         </section>
     </template>
     <!-- #endregion Templates -->

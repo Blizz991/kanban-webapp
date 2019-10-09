@@ -64,8 +64,10 @@ function addColumn() {
         data: jsonColumn,
         dataType: "json",
         success: function (response) {
-            //Add task to DOM
+            //TODO: Add column to DOM
             sendNotification('Column added', "green darken-3 white-text");
+            closeModal('#columnModal');
+            resetView();
         },
         error: function (xhr, status) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
@@ -96,10 +98,10 @@ function getColumns(callback) {
     });
 };
 
-function updateColumn(editingColumn) {
+function updateColumn() {
+    let columnId = $('#columnIdHiddenInput').val();
+    editingColumn = '#tasksColumn-' + columnId;
     let column = $(editingColumn);
-    // console.log($(column).data('column-id'));
-    let columnId = column.data('column-id');
     let columnToUpdate = new KanbanColumn(
         columnId,
         $('#columnTitleInput').val(),
@@ -107,6 +109,7 @@ function updateColumn(editingColumn) {
         column.data('order'),
         column.data('last-updated') //Timestamp of when the element was last edited
     );
+
     $.ajax({
         url: "https://api.kanban.weibel.dev/api/KanbanColumns/" + columnToUpdate.Id,
         type: "PUT",
@@ -123,6 +126,8 @@ function updateColumn(editingColumn) {
             column.data('classes', updatedColumn.Color);
             column.data('order', updatedColumn.Order)
             column.data('last-updated', updatedColumn.Timestamp);
+            closeModal('#columnModal');
+            resetView();
         },
         error: function (xhr, status) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);
@@ -162,12 +167,9 @@ function updateColumnOrder(editingColumn) {
 
 function updateColumnsOrder() {
     //TODO: logic for updating column order
-    // console.log($('.tasks__column'));
 
     $('.tasks__column').each(function (i) {
-        console.log(this);
         $(this).data('order', i)
-        // console.log($(this).data('order'));
         updateColumnOrder(this);
     });
 
@@ -175,8 +177,47 @@ function updateColumnsOrder() {
 }
 
 function deleteColumn() {
-    //TODO: Whine at Stefan because API fails when trying to delete columns
-    alert('API broke...');
+    let columnId = $('#columnIdHiddenInput').val();
+    deletingColumn = '#tasksColumn-' + columnId;
+    let column = $(deletingColumn);
+    let columnToDelete = new KanbanColumn(
+        columnId,
+        column.data('name'),
+        column.data('classes'),
+        column.data('order'),
+        column.data('last-updated') //Timestamp of when the element was last edited
+    );
+
+    $.ajax({
+        url: "https://api.kanban.weibel.dev/api/KanbanColumns/" + columnToDelete.Id,
+        type: "DELETE",
+        crossDomain: true,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        data: JSON.stringify(columnToDelete),
+        success: function (response) {
+            sendNotification('Column successfully deleted', "green darken-3 white-text");
+            closeModal('#columnModal');
+            resetView();
+        },
+        error: function (xhr, status) {
+            switch (xhr.status) {
+                case 404:
+                    sendNotification("Column not found, try refreshing the page", "red darken-3 white-text", 10000);
+                    break;
+                case 409: //Column has tasks
+                    sendNotification(xhr.responseJSON, "red darken-3 white-text", 10000);
+                    break;
+                case 500:
+                    sendNotification('The servers are on fire, please try again later.', "red darken-3 white-text", 10000);
+                default:
+                    sendNotification('No idea what went wrong, sorry.', "red darken-3 white-text", 10000);
+                    break;
+            }
+        }
+    });
 }
 //#endregion Columns CRUD
 
@@ -204,8 +245,9 @@ function addTask() {
         data: jsonTask,
         dataType: "json",
         success: function (response) {
+            sendNotification('Task successfully added.', "green darken-3 white-text");
             //Add task to DOM
-            sendNotification('Task added, please refresh the page.', "green darken-3 white-text");
+            buildTaskFromTemplate(Task.fromJson(response));
         },
         error: function (xhr, status) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);

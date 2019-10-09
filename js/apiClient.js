@@ -302,6 +302,7 @@ function updateTask(task) {
             //Update timestamp in DOM
             task.find('[data-name="task-timestamp"]').data('last-updated', Task.fromJson(response).Timestamp);
             sendNotification('Task updated', "green darken-3 white-text");
+            //TODO: Refresh task view
         },
         error: function (xhr, status) {
             sendNotification(xhr.responseJSON + " try refreshing the page", "red darken-3 white-text", 10000);

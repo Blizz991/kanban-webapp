@@ -1,6 +1,6 @@
 # Kanban'd web app
 
-Live site: https://mdu.webxcellent.dk/web-application/
+Live site: https://mdu.webxcellent.dk/kanban-webapp
 
 
 API & Documentation (Swagger) by Stefan Weibel (https://github.com/Zyano)

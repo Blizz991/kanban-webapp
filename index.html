@@ -66,17 +66,14 @@
             data-column-id="##tasksColumnId##" class="tasks__column card ##tasksColumnClasses##">
             <div class="tasks__column-top-container">
                 <h5 class="fw-600 card-title">##tasksColumnTitle##</h5>
-                <!-- <a href="#backlogModal" class="btn mr-5 waves-effect waves-dark yellow ml-a modal-trigger">
-                            <i class="material-icons">edit</i>
-                        </a> -->
                 <div class="column-top-btns">
                     <i onclick="editColumn(this);"
                         class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped modal-trigger"
-                        data-tooltip="Edit column" data-position="bottom" data-target="columnModal">edit</i>
-                    <!-- TODO: Fix editing columns -->
-                    <!-- <i data-target="columnModal" onclick="editColumn(this);"
-                        class="material-icons icon mr-5 rounded waves-effect waves-dark tooltipped modal-trigger"
-                        data-tooltip="Edit column" data-position="bottom">edit</i> -->
+                        data-tooltip="Edit column"
+                        data-position="bottom"
+                        data-target="columnModal">
+                        edit
+                    </i>
                     <img class="drag-handle icon row-drag-handle tooltipped" data-tooltip="Drag to reorder"
                         data-position="bottom" src="images/move-icon.svg" alt="">
                 </div>
@@ -131,7 +128,7 @@
     <!-- #endregion Templates -->
     <!-- #region Modals -->
     <!-- Used for prototyping (User tests) -->
-    <div id="taskModal" class="modal modal-fixed-footer">
+    <!-- <div id="taskModal" class="modal modal-fixed-footer">
         <section class="modal-content">
             <h4 class="taskModalTitle">Creating a new task</h4>
             <div class="row">
@@ -139,15 +136,6 @@
                     <input placeholder="Task title" id="taskTitleInput" type="text" class="validate">
                     <label for="taskTitleInput">Title</label>
                 </div>
-                <!-- <div class="input-field col s12 m6">
-                    <select id="taskUserSelect" class="icons">
-                        <option value="" disabled selected>Choose user</option>
-                        <option value="red lighten-3" data-icon="https://placehold.it/32/ef9a9a/000000?text=Red" class="left">Light Red</option>
-                        <option value="purple darken-4" data-icon="https://placehold.it/32/4a148c/FFFFFF?text=Purple" class="left">Dark purple</option>
-                        <option value="indigo darken-2" data-icon="https://placehold.it/32/303f9f/FFFFFF?text=Indigo" class="left">Neutral Indigo</option>
-                    </select>
-                    <span class="helper-text">Optional - You do not need to assign a user immediately</span>
-                </div> -->
                 <div class="input-field col s12 m6">
                     <select id="taskPrioritySelect" class="validate">
                         <optgroup class="red-text" label="High priority">
@@ -203,7 +191,6 @@
                     <span class="helper-text">Optional</span>
                 </div>
             </div>
-            <!-- Hidden inputs -->
             <div class="d-none">
                 <input id="taskKanbanColumnIdInput" type="number">
                 <input id="taskOrderInput" type="number">
@@ -213,7 +200,7 @@
             <a href="#!" onclick="confirmCloseModal('#taskModal');" class="waves-effect red waves-red btn">Cancel</a>
             <a href="#!" onclick="postTask('#taskModal');" class="waves-effect green waves-green btn">Submit</a>
         </div>
-    </div>
+    </div> -->
 
     </div>
     <div id="columnModal" class="modal modal-fixed-footer">
@@ -292,10 +279,12 @@
             </div>
             <div class="modal-footer--right">
                 <a href="#!" onclick="resetColumnModal();" class="modal-close waves-effect red waves-red btn">Cancel</a>
-                <a id="modalColumnUpdateBtn" href="#!" onclick="updateColumn();" style="display:none;" class="green white-text waves-effect waves-green btn-flat">
+                <a id="modalColumnUpdateBtn" href="#!" onclick="updateColumn();" style="display:none;"
+                    class="green white-text waves-effect waves-green btn-flat">
                     Update column
                 </a>
-                <a id="modalColumnAddBtn" href="#!" onclick="addColumn();" style="display:none;" class="green white-text waves-effect waves-green btn-flat">
+                <a id="modalColumnAddBtn" href="#!" onclick="addColumn();" style="display:none;"
+                    class="green white-text waves-effect waves-green btn-flat">
                     Add column
                 </a>
             </div>

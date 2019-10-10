@@ -268,7 +268,6 @@ function getTasks(callback) {
             });
             console.log('Successfully pulled tasks from API');
             callback(tasksList);
-
             //Initialize tooltips
             $('.tooltipped').tooltip();
         },

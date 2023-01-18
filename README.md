@@ -1,7 +1,5 @@
 # Kanban'd web app
-
-Live site: https://mdu.webxcellent.dk/kanban-webapp
-
+Project no longer runs anywhere except locally.
 
 API & Documentation (Swagger) by Stefan Weibel (https://github.com/Zyano)
 https://api.kanban.weibel.dev/swagger

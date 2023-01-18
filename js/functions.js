@@ -179,7 +179,7 @@ function buildTaskFromTemplate(task) {
         .replace('##taskContent##', task.Description)
         .replace('##taskEstimate##', task.Estimate)
         .replace('##taskDeadline##', moment(task.Deadline).format("DD/M-YY"))
-        .replace('##taskDeadlineClasses##', taskDeadlineClasses)
+        // .replace('##taskDeadlineClasses##', taskDeadlineClasses)
         .replace('##taskDeadlineFormatted##', moment(task.Deadline).format("Do of MMM. YYYY"))
         // .replace('##taskDeadline##', moment(task.Deadline).format("Do of MMM. YY")) 
         .replace('##taskPriorityUrgency##', taskUrgency)
